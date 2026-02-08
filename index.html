@@ -16,19 +16,22 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      overflow: auto;
+      overflow: hidden;
       padding: 20px;
     }
     .container {
       text-align: center;
+      width: 100%;
     }
     pre {
       font-family: 'Courier New', monospace;
-      font-size: 7px;
-      line-height: 8px;
-      letter-spacing: 1px;
+      font-size: 10px;
+      line-height: 12px;
+      letter-spacing: 1.5px;
       display: inline-block;
       text-align: left;
+      transform-origin: top center;
+      transition: transform 0.3s ease;
     }
     .glow {
       animation: pulse 3s ease-in-out infinite;
@@ -119,5 +122,22 @@
                                                                                                                         
                                                                                                                         </pre>
   </div>
+  <script>
+    function scaleArt() {
+      const pre = document.querySelector('pre');
+      const container = document.querySelector('.container');
+      const viewportWidth = window.innerWidth - 40;
+      const viewportHeight = window.innerHeight - 40;
+      const preWidth = pre.scrollWidth;
+      const preHeight = pre.scrollHeight;
+      const scaleX = viewportWidth / preWidth;
+      const scaleY = viewportHeight / preHeight;
+      const scale = Math.min(scaleX, scaleY, 1.5);
+      pre.style.transform = `scale(${scale})`;
+      container.style.height = (preHeight * scale) + 'px';
+    }
+    window.addEventListener('load', scaleArt);
+    window.addEventListener('resize', scaleArt);
+  </script>
 </body>
 </html>
