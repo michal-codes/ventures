@@ -23,11 +23,12 @@
     Location:     Gliwice
     Twitter:      @devdevmajki
     GitHub:       github.com/michal-codes
+    PGP:          venturesoriginals.com/pgp.txt
 
 
 /* THANKS */
 
-     ☕  Fueled by:    mass amounts of coffee
+    ☕  Fueled by:     mass amounts of coffee
     🐧  Powered by:   open source, & late nights
     🔧  Tools:        nano, bash
 
