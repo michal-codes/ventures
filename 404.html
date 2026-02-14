@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Ventures Originals</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0f;
+    --fg: #c8c8d0;
+    --dim: #484858;
+    --accent: #f7931a;
+    --accent-dim: rgba(247, 147, 26, 0.15);
+    --glow: rgba(247, 147, 26, 0.4);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'JetBrains Mono', monospace;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(247, 147, 26, 0.03) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 50%, rgba(100, 100, 180, 0.02) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .scanlines {
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.08) 2px,
+      rgba(0, 0, 0, 0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .container {
+    text-align: center;
+    padding: 2rem;
+    max-width: 640px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .ascii-art {
+    color: var(--accent);
+    font-size: clamp(0.45rem, 1.4vw, 0.8rem);
+    line-height: 1.2;
+    white-space: pre;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeIn 1.2s ease-out 0.2s forwards;
+    text-shadow: 0 0 20px var(--glow);
+    display: inline-block;
+  }
+
+  .code-404 {
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 700;
+    color: var(--dim);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.8s forwards;
+    position: relative;
+  }
+
+  .code-404::after {
+    content: '_';
+    animation: blink 1s step-end infinite;
+    color: var(--accent);
+  }
+
+  .message {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--dim);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 1.2s forwards;
+    line-height: 1.6;
+  }
+
+  .message span {
+    color: var(--fg);
+  }
+
+  .path {
+    display: inline-block;
+    background: var(--accent-dim);
+    color: var(--accent);
+    padding: 0.15em 0.5em;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .nav {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 1.6s forwards;
+  }
+
+  .nav a {
+    color: var(--dim);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 400;
+    padding: 0.5em 1em;
+    border: 1px solid rgba(72, 72, 88, 0.3);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .nav a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-dim);
+    box-shadow: 0 0 15px rgba(247, 147, 26, 0.1);
+  }
+
+  .nav a::before {
+    content: '→ ';
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .nav a:hover::before {
+    opacity: 1;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.65rem;
+    color: rgba(72, 72, 88, 0.5);
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 2s forwards;
+    white-space: nowrap;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  @media (max-width: 500px) {
+    .ascii-art { font-size: 0.38rem; }
+    .nav { gap: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scanlines"></div>
+
+<div class="container">
+  <pre class="ascii-art">
+ __      __        _                        
+ \ \    / /       | |                       
+  \ \  / /__ _ __ | |_ _   _ _ __ ___  ___  
+   \ \/ / _ \ '_ \| __| | | | '__/ _ \/ __| 
+    \  /  __/ | | | |_| |_| | | |  __/\__ \ 
+     \/ \___|_| |_|\__|\__,_|_|  \___||___/ 
+      ___       _       _             _     
+     / _ \ _ __(_) __ _(_)_ __   __ _| |___ 
+    | | | | '__| |/ _` | | '_ \ / _` | / __|
+    | |_| | |  | | (_| | | | | | (_| | \__ \
+     \___/|_|  |_|\__, |_|_| |_|\__,_|_|___/
+                   __/ |                     
+                  |___/                      
+  </pre>
+
+  <div class="code-404">404</div>
+
+  <div class="message">
+    <span>node not found.</span><br>
+    the route <span class="path" id="currentPath"></span> doesn't exist.
+  </div>
+
+  <nav class="nav">
+    <a href="https://venturesoriginals.com/">home</a>
+    <a href="https://venturesoriginals.com/lightning.html">lightning</a>
+  </nav>
+</div>
+
+<div class="footer">ventures originals - building on Lightning</div>
+
+<script>
+  document.getElementById('currentPath').textContent = window.location.pathname;
+</script>
+
+</body>
+</html>
