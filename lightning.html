@@ -75,7 +75,7 @@
 
   <div class="stats">
     <div>
-      <div class="stat-label">CURRENT</div>
+      <div class="stat-label">CAPACITY</div>
       <div class="stat-value orange" id="current"></div>
     </div>
     <div>
@@ -85,6 +85,21 @@
     <div>
       <div class="stat-label">CHANGE %</div>
       <div class="stat-value green" id="changePct"></div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div>
+      <div class="stat-label">NODES (TOTAL)</div>
+      <div class="stat-value orange" id="totalNodes"></div>
+    </div>
+    <div>
+      <div class="stat-label">NODES (ACTIVE)</div>
+      <div class="stat-value green" id="activeNodes"></div>
+    </div>
+    <div>
+      <div class="stat-label">CHANNELS</div>
+      <div class="stat-value orange" id="channels"></div>
     </div>
   </div>
 
@@ -100,16 +115,22 @@
 
 <script>
 const rawData = [
-  { timestamp: 1771036352, capacity_sat: 515570537612 },
-  { timestamp: 1771037038, capacity_sat: 516223469991 },
-  { timestamp: 1771037484, capacity_sat: 516273469991 },
-  { timestamp: 1771040445, capacity_sat: 516335188246 },
+  { timestamp: 1771036352, total_nodes: 17294, active_nodes: 6670, channels: 50516, capacity_sat: 515570537612 },
+  { timestamp: 1771037038, total_nodes: 17297, active_nodes: 6676, channels: 50579, capacity_sat: 516223469991 },
+  { timestamp: 1771037484, total_nodes: 17297, active_nodes: 6676, channels: 50580, capacity_sat: 516273469991 },
+  { timestamp: 1771040445, total_nodes: 17298, active_nodes: 6678, channels: 50584, capacity_sat: 516335188246 },
+  { timestamp: 1771066804, total_nodes: 17297, active_nodes: 6680, channels: 50602, capacity_sat: 516763665704 },
+  { timestamp: 1771073793, total_nodes: 17301, active_nodes: 6682, channels: 50615, capacity_sat: 516735512214 },
+  { timestamp: 1771075796, total_nodes: 17300, active_nodes: 6682, channels: 50625, capacity_sat: 516925136955 },
 ];
 
 const data = rawData.map(d => ({
   time: new Date(d.timestamp * 1000).toLocaleTimeString('pl-PL', { hour:'2-digit', minute:'2-digit' }),
   btc: d.capacity_sat / 1e8,
   sats: d.capacity_sat,
+  total_nodes: d.total_nodes,
+  active_nodes: d.active_nodes,
+  channels: d.channels,
 }));
 
 const btcValues = data.map(d => d.btc);
@@ -119,10 +140,14 @@ const lastBtc = data[data.length - 1].btc;
 const firstBtc = data[0].btc;
 const changeBtc = (lastBtc - firstBtc).toFixed(2);
 const changePctVal = (((lastBtc - firstBtc) / firstBtc) * 100).toFixed(4);
+const last = data[data.length - 1];
 
 document.getElementById('current').textContent = '₿ ' + lastBtc.toFixed(2);
 document.getElementById('change').textContent = '+' + changeBtc + ' BTC';
 document.getElementById('changePct').textContent = '+' + changePctVal + '%';
+document.getElementById('totalNodes').textContent = last.total_nodes.toLocaleString('pl-PL');
+document.getElementById('activeNodes').textContent = last.active_nodes.toLocaleString('pl-PL');
+document.getElementById('channels').textContent = last.channels.toLocaleString('pl-PL');
 document.getElementById('footerDate').innerHTML =
   new Date(rawData[0].timestamp * 1000).toLocaleDateString('pl-PL') + ' ⚡ LIVE';
 
